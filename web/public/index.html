@@ -9,4 +9,22 @@
     <input type="input" name="url"></input>
   </form>
 </body>
+<!-- send an ajax request with the contents of the input -->
+<!-- <script> 
+  $('form').on('submit', function(e) {
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: 'http://127.0.0.1:8080/',
+      data: JSON.stringify(this).val(),
+      success: function(data) {
+        console.log(data);        
+      },
+      error: function (error) {
+        console.log('error', error);
+      }
+    });
+  });
+
+</script> -->
 </html>
