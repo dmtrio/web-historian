@@ -75,29 +75,19 @@ exports.addUrlToList = function(url, callback) {
   });
 };
 
-exports.isUrlArchived = function(url, callback) {
-  //read the contents of the directory
-    //
-  // fs.readdir(this.paths.archivedSites, (err, files) => {
-  //   callback(files.forEach((file) => {
-  //     if (file === url) {
-  //       return true;
-  //     }
-  //   }));
-  // });  
+exports.isUrlArchived = function(url, callback) { 
   
   fs.readdir(this.paths.archivedSites, (err, files) => {
     // check each of the items in the files array against the url
       //if match return true
       //else return false
-      
+    var flag = false;  
     files.forEach(function(file) {
       if (file === url) {
-        callback(true);
+        flag = true;
       }    
     });
-    callback(false);
-    // callback();
+    callback(flag);
   });  
 };
 
