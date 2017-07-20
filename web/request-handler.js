@@ -19,6 +19,7 @@ exports.handleRequest = function (req, res) {
   
   console.log(parsedUrl);
   
+  //filter through
   
   if (req.method === 'GET' && parsedUrl.pathname === '/') {
     fsFileSystem.readFile('./web/public/index.html', (err, data) => {
@@ -35,8 +36,7 @@ exports.handleRequest = function (req, res) {
       res.writeHead(200, localHeader);     
       
       res.end(body);
-    });
-    
+    });    
   }
   if (req.method === 'GET' && parsedUrl.pathname === '/styles.css') {
     fsFileSystem.readFile('./web/public/styles.css', (err, data) => {
