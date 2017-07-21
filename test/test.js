@@ -78,7 +78,7 @@ describe('server', function() {
 });
 
 describe('archive helpers', function() {
-  describe('#readListOfUrls', function () {
+  descr ibe('#readListOfUrls', function () {
     //no.1
     it('should read urls from sites.txt', function (done) {
       var urlArray = ['example1.com', 'example2.com'];

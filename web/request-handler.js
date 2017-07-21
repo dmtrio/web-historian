@@ -21,6 +21,7 @@ exports.handleRequest = function (req, res) {
   
   //filter through
   
+  
   if (req.method === 'GET' && parsedUrl.pathname === '/') {
     fsFileSystem.readFile('./web/public/index.html', (err, data) => {
       if (err) {
@@ -54,23 +55,25 @@ exports.handleRequest = function (req, res) {
       res.end(body);
     });
   } else if (req.method === 'POST') {
-    fsFileSystem.writeFile(archive.paths.list, (err, data) => {
-      if (err) {
-        throw err;
-      }  
-      var localHeader = headers;
+    body = '';
+    req.on('data', (chunk) => {
+      body += chunk;
+    }).on('end', () => {
+      console.log('boooooody', body);
       
-      localHeader['Content-Type'] = 'text/html; charset=utf-8';
+      archive.addUrlToList(body.slice(4), () => {
+      // at this point, `body` has the entire request body stored in it as a string
+        var localHeader = headers;
+        
+        localHeader['Content-Type'] = 'text/html; charset=utf-8';
       
-      var body = ''; 
-      body += data;
-
-      res.writeHead(302, localHeader);
-      res.end();    
-
-  
-    });
-
+        res.writeHead(302, localHeader);
+        res.end();    
+      });
+    
+    //we check the pathname    
+      
+    }); 
 
   } else { 
     archive.isUrlArchived(parsedUrl.pathname.slice(1), function(bool) {
